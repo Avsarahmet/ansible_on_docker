@@ -1,0 +1,21 @@
+- name: Install Mysql Database
+  apt:
+    name: ['mysql-server', 'mysql-client']
+    state: present
+- name: Start Mysql Service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+- name: Create Mysql Database
+  mysql_db:
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: "{{ db_name }}"
+    state: present
+- name: Create Database User
+  mysql_user:
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: "{{ db_user }}"
+    password: "{{ db_user_pass }}"
+    priv: '*.*:ALL'
+    state: present

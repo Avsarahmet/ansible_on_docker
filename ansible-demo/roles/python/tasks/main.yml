@@ -1,0 +1,4 @@
+- name: Install all required dependencies for python
+  apt:
+    name: ['python', 'python-setuptools', 'python-dev', 'build-essential']
+    state: present
